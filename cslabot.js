@@ -14,12 +14,15 @@ const Memer = require("random-jokes-api");
 const client = new Discord.Client();
 
 const prefix = '!';
-const welcomeChannelID = '761558359496327203';
-const supportRoleID = '785828301129515009';
-const twitchChannelID = '';
 const cslaBotToken = 'MTAxNDg3MTU4MTM3MTE1ODUyOA.GM4sh_.aIVSGN51jXbju3GLJrmaD8hOQ8OFXwZLwNJv8g';
 
+const welcomeChannelID = '761558359496327203';
+const imgOnlyChannelID = '761558359496327203';
+const twitchChannelID = '';
+const supportRoleID = '785828301129515009';
+
 client.on('message',message => {
+
 // diag and help commands
   if (message.mentions.has(client.user.id)) {message.channel.send("Hello there. 😊 What do you need help with today?\n\nMy prefix is `" + `${prefix}` + "` \nRun `!help` when you're in troubles to get a list of all supported commands");}
   if (message.content.startsWith(prefix + 'help')) {message.reply('here is a list of all available commands:\n```!help - show this list\n!uptime - calculate time how long the bot is online\n!restart - restart the bot (admin only)\n!ticket - create a new support ticket\n!servers - list of official servers running with CIC\n!ping - get a pong with latency\n!joke - get a random joke\n!chuck - get a random Chuck Norris joke\n!compliment - get a random compliment\n!meme - get a random meme image\n!csla - show all CIC links\n!biki - link to our BI Wiki page\n!ft - link to our Feedback Tracker project```');}
@@ -66,6 +69,13 @@ client.on('message',message => {
     .setFooter(`All our servers are BattlEye protected!`)
     .setTimestamp()
     message.channel.send(serverEmbed)
+}
+
+// image only channel(s) setup
+if (message.attachments.size == 0 && message.channel.id == imgOnlyChannelID) {
+  if (message.author.bot) return false;
+  if (message.attachments.size == 0) message.delete();
+  message.channel.send("This is an image-only channel!");
 }
 
 // chat commands for fun    
