@@ -1,0 +1,18 @@
+{
+  "name": "codelyon-2021",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cslabot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord-command-cooldown": "^1.0.8",
+    "discord.js": "^12.5.3",
+    "dotenv": "^16.0.2",
+    "pretty-ms": "^8.0.0",
+    "random-jokes-api": "^1.5.9"
+  }
+}
