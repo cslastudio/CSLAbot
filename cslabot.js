@@ -105,11 +105,27 @@ client.on('message',message => {
     client.user.setActivity('CSLA: IC with you');
   }
 
+  if (message.content.startsWith(prefix + 'shutdown')) {client.destroy();}
+
 // ticket management commands
   if (message.content.startsWith(prefix + 'ticket')) {
     var ticketID = Math.floor(Math.random() * 100) + 1;
-    const channel = message.guild.channels.create(`ticket: ${ticketID}`);
-    message.channel.send("Thank you for contacting our support team! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`");
+    const channel = message.guild.channels.create(`ticket: ${ticketID}`, 
+    {
+      type: 'text',
+      topic: `Your dedicated space to communicate with our Support team.`,
+      permissionOverwrites: [
+      {
+          id: message.guild.roles.everyone,
+          deny: ['VIEW_CHANNEL', 'SEND_MESSAGES'], 
+      },
+      {
+        id: message.author,
+        allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
+      }
+     ],
+    }).then(channel => channel.send("Thank you for contacting our Support team, we'll be with you shortly!"));
+    //message.channel.send("Thank you for contacting our support team! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`");
   }
 });
 
