@@ -1,7 +1,6 @@
 /*
     To-Do:
         Implementovat notifikacie z Twitchu pre nas (CSLA Studio channel podla https://codepen.io/synplex/pen/goeWNb
-        Implementovať kontrolu botom na kanály tak ako to má MEE6 - image only, video only ...
         Implementovať uzatváranie ticketov
 
         message.delete(); -- zmazanie commandu od usera po vlozeni
@@ -22,7 +21,6 @@ const twitchChannelID = '';
 const supportRoleID = '785828301129515009';
 
 client.on('message',message => {
-
 // diag and help commands
   if (message.mentions.has(client.user.id)) {message.channel.send("Hello there. 😊 What do you need help with today?\n\nMy prefix is `" + `${prefix}` + "` \nRun `!help` when you're in troubles to get a list of all supported commands");}
   if (message.content.startsWith(prefix + 'help')) {message.reply('here is a list of all available commands:\n```!help - show this list\n!uptime - calculate time how long the bot is online\n!restart - restart the bot (admin only)\n!ticket - create a new support ticket\n!servers - list of official servers running with CIC\n!ping - get a pong with latency\n!joke - get a random joke\n!chuck - get a random Chuck Norris joke\n!compliment - get a random compliment\n!meme - get a random meme image\n!csla - show all CIC links\n!biki - link to our BI Wiki page\n!ft - link to our Feedback Tracker project```');}
@@ -72,11 +70,11 @@ client.on('message',message => {
 }
 
 // image only channel(s) setup
-if (message.attachments.size == 0 && message.channel.id == imgOnlyChannelID) {
-  if (message.author.bot) return false;
-  if (message.attachments.size == 0) message.delete();
-  message.channel.send("This is an image-only channel!");
-}
+  if (message.attachments.size == 0 && message.channel.id == imgOnlyChannelID) {
+    if (message.author.bot) return false;
+    if (message.attachments.size == 0) message.delete();
+    message.channel.send("This is an image-only channel!").then(msg => {msg.delete({timeout: 10000});});
+  }
 
 // chat commands for fun    
   if (message.content.startsWith(prefix + 'ping')) {message.reply(`pong! (${message.createdTimestamp - Date.now()} ms)` );}
@@ -133,7 +131,8 @@ if (message.attachments.size == 0 && message.channel.id == imgOnlyChannelID) {
       }
      ],
     }).then(channel => channel.send(`Thank you for contacting our <@&${supportRoleID}>, we'll be with you shortly!`));
-    message.channel.send("Thank you for contacting our Support team! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`");
+    message.channel.send("Thank you for contacting our Support team! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`").then(msg => msg.delete({timeout: 10000}))
+    message.delete({timeout: 10000});
   }});
 
 client.on('guildCreate',g => {
