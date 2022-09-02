@@ -11,11 +11,11 @@
 
 const Discord = require('discord.js');
 const Memer = require("random-jokes-api");
-const { ChannelType, PermissionsBitField } = require('discord.js');
 const client = new Discord.Client();
 
 const prefix = '!';
 const welcomeChannelID = '761558359496327203';
+const supportRoleID = '785828301129515009';
 const twitchChannelID = '';
 const cslaBotToken = 'MTAxNDg3MTU4MTM3MTE1ODUyOA.GM4sh_.aIVSGN51jXbju3GLJrmaD8hOQ8OFXwZLwNJv8g';
 
@@ -124,10 +124,9 @@ client.on('message',message => {
         allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
       }
      ],
-    }).then(channel => channel.send("Thank you for contacting our Support team, we'll be with you shortly!"));
-    //message.channel.send("Thank you for contacting our support team! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`");
-  }
-});
+    }).then(channel => channel.send(`Thank you for contacting our <@&${supportRoleID}>, we'll be with you shortly!`));
+    message.channel.send("Thank you for contacting our support team! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`");
+  }});
 
 client.on('guildCreate',g => {
     const channel = g.channels.cache.find(channel => channel.type === 'GUILD_TEXT' && channel.permissionsFor(g.me).has('SEND_MESSAGES'))
