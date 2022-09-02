@@ -11,6 +11,7 @@
 const Discord = require('discord.js');
 const Memer = require("random-jokes-api");
 const client = new Discord.Client();
+const WELCOME_MSG = 'FALSE';
 
 const prefix = '!';
 const cslaBotToken = 'MTAxNDg3MTU4MTM3MTE1ODUyOA.GM4sh_.aIVSGN51jXbju3GLJrmaD8hOQ8OFXwZLwNJv8g';
@@ -135,12 +136,14 @@ client.on('message',message => {
     message.delete({timeout: 10000});
   }});
 
-client.on('guildCreate',g => {
+if(WELCOME_MSG == 'TRUE') {
+  client.on('guildCreate',g => {
     const channel = g.channels.cache.find(channel => channel.type === 'GUILD_TEXT' && channel.permissionsFor(g.me).has('SEND_MESSAGES'))
     channel.send("Beep, boop.\n\n Hi, I'm CSLA Bot. :wave::skin-tone-1: I'm an assistant bot at CSLA Studio's Discord (https://discord.gg/jBWHyUWu9D).\n\nI am developed by Lukas Maar (https://github.com/LUKICSLA).")
-});
+  });
+  client.on('guildMemberAdd',member => {member.guild.channels.cache.get(welcomeChannelID).send("Welcome on CSLA Studio's Discord " + member.user.tag + " 👋🏻");});
+  client.on('guildMemberRemove',member => {member.guild.channels.cache.get(welcomeChannelID).send("Bye " + member.user.tag + " 😭");});
+}
 
-client.on('guildMemberAdd',member => {member.guild.channels.cache.get(welcomeChannelID).send("Welcome on CSLA Studio's Discord " + member.user.tag);});
-client.on('guildMemberRemove',member => {member.guild.channels.cache.get(welcomeChannelID).send("Bye " + member.user.tag);});
 client.on("ready", () => {console.log(`\n\nLogged in as ${client.user.tag}!\nCopyright © 2022 Lukáš Maár (https://github.com/LUKICSLA)`); client.user.setActivity('CSLA: IC with you');});
 client.login(cslaBotToken);
