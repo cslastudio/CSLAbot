@@ -2,7 +2,7 @@
     To-Do:
         Implementovat notifikacie z Twitchu pre nas (CSLA Studio channel podla https://codepen.io/synplex/pen/goeWNb
         Implementovať kontrolu botom na kanály tak ako to má MEE6 - image only, video only ...
-        Implementovať ticket systém - WIP
+        Implementovať uzatváranie ticketov
 
         message.delete(); -- zmazanie commandu od usera po vlozeni
 */
@@ -105,8 +105,6 @@ client.on('message',message => {
     client.user.setActivity('CSLA: IC with you');
   }
 
-  if (message.content.startsWith(prefix + 'shutdown')) {client.destroy();}
-
 // ticket management commands
   if (message.content.startsWith(prefix + 'ticket')) {
     var ticketID = Math.floor(Math.random() * 100) + 1;
@@ -125,7 +123,7 @@ client.on('message',message => {
       }
      ],
     }).then(channel => channel.send(`Thank you for contacting our <@&${supportRoleID}>, we'll be with you shortly!`));
-    message.channel.send("Thank you for contacting our support team! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`");
+    message.channel.send("Thank you for contacting our Support team! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`");
   }});
 
 client.on('guildCreate',g => {
