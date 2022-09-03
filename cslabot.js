@@ -33,8 +33,8 @@ client.on('message',message => {
     .addFields(
       { name: ':bust_in_silhouette: Developer', value: 'Lukáš Maár (Lukyy#4488)', inline: true },
       { name: ':robot: Version', value: '1.0.0', inline: true },
-      { name: ':scroll: Commands', value: '12', inline: true },
-      { name: ':ping_pong: Ping', value: `${ping} ms`, inline: false },
+      //{ name: ':scroll: Commands', value: '12', inline: true },
+      { name: ':ping_pong: Ping', value: `${ping} ms`, inline: true },
       { name: ':hourglass: Uptime', value: uptime, inline: false },
     )
     .setFooter(`Feel free to mention me if you need me or use !help.`)
