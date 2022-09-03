@@ -62,18 +62,6 @@ client.on('message',message => {
     message.channel.send(helpEmbed)
 }
 
-    if (message.content.startsWith(prefix + 'uptime')) {
-    let totalSeconds = (client.uptime / 1000);
-    let days = Math.floor(totalSeconds / 86400);
-    totalSeconds %= 86400;
-    let hours = Math.floor(totalSeconds / 3600);
-    totalSeconds %= 3600;
-    let minutes = Math.floor(totalSeconds / 60);
-    let seconds = Math.floor(totalSeconds % 60);
-    let uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds.`;
-    message.channel.send("I'm with you for " + "**" + `${uptime}` + "**")
-  }
-
   if (message.content.startsWith(prefix + 'servers')) {
     let serverEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
@@ -116,7 +104,6 @@ client.on('message',message => {
 
 // chat commands for fun    
   if (message.content.startsWith(prefix + 'ping')) {message.reply(`pong! (${message.createdTimestamp - Date.now()} ms)` );}
-  if (message.content.startsWith(prefix + 'neny')) {message.channel.send(`Maroš neny. Možno ističe? 🤔`);}
   if (message.content.startsWith(prefix + 'joke')) {let jokes = Memer.joke(); message.channel.send(jokes)}
   if (message.content.startsWith(prefix + 'chuck')) {let chuck = Memer.chuckNorris(); message.channel.send(chuck)}
   if (message.content.startsWith(prefix + 'compliment')) {let compliment = Memer.copmliment(); message.channel.send(compliment)}
