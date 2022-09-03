@@ -3,14 +3,14 @@
 const Discord = require('discord.js');
 const Memer = require("random-jokes-api");
 const client = new Discord.Client();
-const WELCOME_MSG = 'FALSE';
 
+const WELCOME_MSG = 'FALSE';
 const prefix = '!';
 const cslaBotToken = 'MTAxNDg3MTU4MTM3MTE1ODUyOA.GM4sh_.aIVSGN51jXbju3GLJrmaD8hOQ8OFXwZLwNJv8g';
+const msgDeleteCooldown = 20000;
 
 const welcomeChannelID = '761558359496327203';
 const imgOnlyChannelID = '852283174523502642';
-const twitchChannelID = '';
 const supportRoleID = '571000938920149011';
 
 client.on('message',message => {
@@ -155,7 +155,8 @@ client.on('message',message => {
 // ticket management commands
   if (message.content.startsWith(prefix + 'ticket')) {
     var ticketID = Math.floor(Math.random() * 100) + 1;
-    const channel = message.guild.channels.create(`ticket: ${ticketID}`, 
+//  message.react('<:cslastudio:EMOJI_ID_HERE>');         https://support.discord.com/hc/es/community/posts/360069335891-Get-Emoji-ID
+    message.guild.channels.create(`ticket: ${ticketID}`,
     {
       type: 'text',
       topic: `Your dedicated space to communicate with our Support team.`,
@@ -170,8 +171,8 @@ client.on('message',message => {
       }
      ],
     }).then(channel => channel.send(`Thank you for contacting <@&${supportRoleID}> team, we'll be with you shortly!`));
-    message.channel.send("Thank you for contacting our Support team! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`").then(msg => msg.delete({timeout: 10000}))
-    message.delete({timeout: 10000});
+    message.channel.send("Thank you for contacting our Support team! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`").then(msg => msg.delete({timeout: msgDeleteCooldown}))
+    message.delete({timeout: msgDeleteCooldown});
   }});
 
 if(WELCOME_MSG == 'TRUE') {
