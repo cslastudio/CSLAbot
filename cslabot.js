@@ -27,13 +27,13 @@ client.on('message',message => {
 
     let aboutEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
-    .setTitle("About Cbot | An assistant bot")
+    .setTitle("About Cbot | CSLA assistant bot")
     .setThumbnail('http://kai.rf.gd/images/images.png')
     .setDescription("*Beep, boop.* Hi, I'm **Cbot**. :wave::skin-tone-1: 😊 I'm an assistant bot at CSLA Studio Discord.")
     .addFields(
       { name: ':bust_in_silhouette: Developer', value: 'Lukáš Maár (Lukyy#4488)', inline: true },
       { name: ':robot: Version', value: '1.0.0 (03.09.2022)', inline: true },
-      { name: ':scroll: Commands', value: '13', inline: true },
+      { name: ':scroll: Commands', value: '12', inline: true },
       { name: ':hourglass: Uptime', value: uptime, inline: true },
     )
     .setFooter(`Feel free to mention me if you need me or use !help.`)
@@ -44,7 +44,7 @@ client.on('message',message => {
   if (message.content.startsWith(prefix + 'help')) {
     let helpEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
-    .setTitle("Cbot | An assistant bot")
+    .setTitle("Cbot | CSLA assistant bot")
     .setThumbnail('http://kai.rf.gd/images/images.png')
     .setDescription("Here is a list of all available commands.")
     .addFields(
