@@ -15,9 +15,54 @@ const supportRoleID = '785828301129515009';
 
 client.on('message',message => {
 // diag and help commands
-  if (message.mentions.has(client.user.id)) {message.channel.send("Hello there. 😊 What do you need help with today?\n\nMy prefix is `" + `${prefix}` + "` \nRun `!help` when you're in troubles to get a list of all supported commands");}
-  if (message.content.startsWith(prefix + 'help')) {message.reply('here is a list of all available commands:\n```!help - show this list\n!uptime - calculate time how long the bot is online\n!restart - restart the bot (admin only)\n!ticket - create a new support ticket\n!servers - list of official servers running with CIC\n!ping - get a pong with latency\n!joke - get a random joke\n!chuck - get a random Chuck Norris joke\n!compliment - get a random compliment\n!meme - get a random meme image\n!csla - show all CIC links\n!biki - link to our BI Wiki page\n!ft - link to our Feedback Tracker project```');}
-  if (message.content.startsWith(prefix + 'uptime')) {
+  if (message.mentions.has(client.user.id)) {
+    let totalSeconds = (client.uptime / 1000);
+    let days = Math.floor(totalSeconds / 86400);
+    totalSeconds %= 86400;
+    let hours = Math.floor(totalSeconds / 3600);
+    totalSeconds %= 3600;
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = Math.floor(totalSeconds % 60);
+    let uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds.`;
+
+    let aboutEmbed = new Discord.MessageEmbed()
+    .setColor("40E0D0")
+    .setTitle("About Cbot | An assistant bot")
+    .setThumbnail('http://kai.rf.gd/images/images.png')
+    .setDescription("*Beep, boop.* Hi, I'm Cbot. :wave::skin-tone-1: I'm an assistant bot at CSLA Studio Discord.")
+    .addFields(
+      { name: 'Developer', value: 'Lukáš Maár (Lukyy#4488)', inline: true },
+      { name: 'Version', value: '1.0.0 (03.09.2022)', inline: true },
+      { name: 'Commands', value: '13', inline: true },
+      { name: 'Uptime', value: uptime, inline: true },
+    )
+    .setFooter(`Feel free to mention me if you need me or use !help.`)
+    .setTimestamp()
+    message.channel.send(aboutEmbed)
+    
+    //message.channel.send("Hello there. 😊 What do you need help with today?\n\nMy prefix is `" + `${prefix}` + "` \nRun `!help` when you're in troubles to get a list of all supported commands");
+  }
+  if (message.content.startsWith(prefix + 'help')) {
+    let helpEmbed = new Discord.MessageEmbed()
+    .setColor("40E0D0")
+    .setTitle("Cbot | An assistant bot")
+    .setThumbnail('http://kai.rf.gd/images/images.png')
+    .setDescription("Here is a list of all available commands.")
+    .addFields(
+      { name: 'General commands', value: '`!help` - show this list\n`!ticket` - create a new support ticket\n`!joke` - get a random joke\n`!chuck` - get a random Chuck Norris joke\n`!compliment` - get a random compliment\n`!meme` - get a random meme image' },
+      { name: '\u200B', value: '\u200B' },
+      { name: 'Diag commands', value: '`!ping` - get a bot latency' },
+      { name: '\u200B', value: '\u200B' },
+      { name: 'Admin commands', value: '`!restart` - restart the bot' },
+      { name: '\u200B', value: '\u200B' },
+      { name: 'CSLA Iron Curtain cDLC commands', value: '`!servers` - list of official servers running with CIC\n`!csla` - show all CIC links\n`!biki` - link to our BI Wiki page\n`!ft` - link to our Feedback Tracker project' },
+    )
+    .setFooter(`Feel free to mention me if you need me or use !help.`)
+    .setTimestamp()
+    message.channel.send(helpEmbed)
+}
+
+    if (message.content.startsWith(prefix + 'uptime')) {
     let totalSeconds = (client.uptime / 1000);
     let days = Math.floor(totalSeconds / 86400);
     totalSeconds %= 86400;
@@ -103,7 +148,7 @@ client.on('message',message => {
     client.destroy();
     client.login(cslaBotToken);
     console.log('Bot restart done');
-    client.user.setActivity('CSLA: IC with you');
+    client.user.setActivity('CSLA: Iron Curtain');
   }
 
 // ticket management commands
@@ -137,5 +182,5 @@ if(WELCOME_MSG == 'TRUE') {
   client.on('guildMemberRemove',member => {member.guild.channels.cache.get(welcomeChannelID).send("Bye " + member.user.tag + " 😭");});
 }
 
-client.on("ready", () => {console.log(`\n\nLogged in as ${client.user.tag}!\nCopyright © 2022 Lukáš Maár (https://github.com/LUKICSLA)`); client.user.setActivity('CSLA: IC with you');});
+client.on("ready", () => {console.log(`\n\nLogged in as ${client.user.tag}!\nCopyright © 2022 Lukáš Maár (https://github.com/LUKICSLA)`); client.user.setActivity('CSLA: Iron Curtain');});
 client.login(cslaBotToken);
