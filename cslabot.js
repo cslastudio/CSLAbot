@@ -32,10 +32,10 @@ client.on('message',message => {
     .setDescription("*Beep, boop.* Hi, I'm **Cbot**. :wave::skin-tone-1: 😊 I'm an assistant bot at CSLA Studio Discord.")
     .addFields(
       { name: ':bust_in_silhouette: Developer', value: 'Lukáš Maár (Lukyy#4488)', inline: true },
-      { name: ':robot: Version', value: '1.0.0 (03.09.2022)', inline: true },
+      { name: ':robot: Version', value: '1.0.0', inline: true },
       { name: ':scroll: Commands', value: '12', inline: true },
-      { name: ':hourglass: Uptime', value: uptime, inline: true },
-      { name: ':ping_pong: Ping', value: `${ping} ms`, inline: true },
+      { name: ':ping_pong: Ping', value: `${ping} ms`, inline: false },
+      { name: ':hourglass: Uptime', value: uptime, inline: false },
     )
     .setFooter(`Feel free to mention me if you need me or use !help.`)
     .setTimestamp()
