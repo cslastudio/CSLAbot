@@ -29,7 +29,7 @@ client.on('message',message => {
     .setColor("40E0D0")
     .setTitle("About Cbot | An assistant bot")
     .setThumbnail('http://kai.rf.gd/images/images.png')
-    .setDescription("*Beep, boop.* Hi, I'm **Cbot.** :wave::skin-tone-1: I'm an assistant bot at CSLA Studio Discord.")
+    .setDescription("*Beep, boop.* Hi, I'm **Cbot**. :wave::skin-tone-1: I'm an assistant bot at CSLA Studio Discord.")
     .addFields(
       { name: ':bust_in_silhouette: Developer', value: 'Lukáš Maár (Lukyy#4488)', inline: true },
       { name: ':robot: Version', value: '1.0.0 (03.09.2022)', inline: true },
