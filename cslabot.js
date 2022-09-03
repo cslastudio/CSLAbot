@@ -2,16 +2,8 @@
 
 const Discord = require('discord.js');
 const Memer = require("random-jokes-api");
+require('dotenv').config();
 const client = new Discord.Client();
-
-const WELCOME_MSG = 'FALSE';
-const prefix = '!';
-const cslaBotToken = 'MTAxNDg3MTU4MTM3MTE1ODUyOA.GM4sh_.aIVSGN51jXbju3GLJrmaD8hOQ8OFXwZLwNJv8g';
-const msgDeleteCooldown = 20000;
-
-const welcomeChannelID = '761558359496327203';
-const imgOnlyChannelID = '852283174523502642';
-const supportRoleID = '571000938920149011';
 
 client.on('message',message => {
 // diag and help commands
@@ -41,7 +33,7 @@ client.on('message',message => {
     message.channel.send(aboutEmbed)
     
   }
-  if (message.content.startsWith(prefix + 'help')) {
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'help')) {
     let helpEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
     .setTitle("Command list | Cbot")
@@ -61,7 +53,7 @@ client.on('message',message => {
     message.channel.send(helpEmbed)
 }
 
-  if (message.content.startsWith(prefix + 'servers')) {
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'servers')) {
     let serverEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
     .setTitle("Our servers")
@@ -95,17 +87,17 @@ client.on('message',message => {
 }
 
 // image only channel(s) setup
-  if (message.attachments.size == 0 && message.channel.id == imgOnlyChannelID) {
+  if (message.attachments.size == 0 && message.channel.id == process.env.IMG_ONLY_CHANNEL_ID) {
     if (message.author.bot) return false;
     if (message.attachments.size == 0) message.delete();
     message.channel.send("This is an image-only channel!").then(msg => {msg.delete({timeout: 10000});});
   }
 
 // chat commands for fun
-  if (message.content.startsWith(prefix + 'joke')) {let jokes = Memer.joke(); message.channel.send(jokes)}
-  if (message.content.startsWith(prefix + 'chuck')) {let chuck = Memer.chuckNorris(); message.channel.send(chuck)}
-  if (message.content.startsWith(prefix + 'compliment')) {let compliment = Memer.copmliment(); message.channel.send(compliment)}
-  if (message.content.startsWith(prefix + 'meme')) {
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'joke')) {let jokes = Memer.joke(); message.channel.send(jokes)}
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'chuck')) {let chuck = Memer.chuckNorris(); message.channel.send(chuck)}
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'compliment')) {let compliment = Memer.copmliment(); message.channel.send(compliment)}
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'meme')) {
     let meme = Memer.meme()
     let embed = new Discord.MessageEmbed()
     .setTitle(meme.title)
@@ -115,7 +107,7 @@ client.on('message',message => {
 }
 
 // info commands
-  if (message.content.startsWith(prefix + 'csla')) {
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'csla')) {
     let cslaEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
     .setTitle("CSLA: IC and packs | Cbot")
@@ -132,8 +124,8 @@ client.on('message',message => {
     .setTimestamp()
     message.channel.send(cslaEmbed)
   }
-  if (message.content.startsWith(prefix + 'biki')) {message.reply('our biki page is at https://community.bistudio.com/wiki/Category:CSLA:_Iron_Curtain');}
-  if (message.content.startsWith(prefix + 'ft')) {message.reply('our Feedback Tracker project is at https://feedback.bistudio.com/project/view/59');}
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'biki')) {message.reply('our biki page is at https://community.bistudio.com/wiki/Category:CSLA:_Iron_Curtain');}
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'ft')) {message.reply('our Feedback Tracker project is at https://feedback.bistudio.com/project/view/59');}
 
 // auto-replies  
 /*    if (message.content.includes('update')) {message.channel.send("The plan is to resolve issues and fix bugs first and then we can devote our time to possible updates. Any updates will first have to be approved by BI.")}
@@ -143,17 +135,17 @@ client.on('message',message => {
 */
 
 // admin chat commands
-  if (message.content.startsWith(prefix + 'restart')) {
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'restart')) {
     if (!message.member.hasPermission("ADMINISTRATOR")){message.reply('you cannot do that (missing permission ADMINISTRATOR)! ✋'); return;}
     message.reply('really? Okay then, bye 😭');
     client.destroy();
-    client.login(cslaBotToken);
+    client.login(process.env.CBOT_TOKEN);
     console.log('Bot restart done');
     client.user.setActivity('CSLA: Iron Curtain');
   }
 
 // ticket management commands
-  if (message.content.startsWith(prefix + 'ticket')) {
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'ticket')) {
     var ticketID = Math.floor(Math.random() * 100) + 1;
     message.react('<:cslastudio:847143632922345520>');
     message.guild.channels.create(`ticket: ${ticketID}`,
@@ -170,19 +162,19 @@ client.on('message',message => {
         allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
       }
      ],
-    }).then(channel => channel.send(`Thank you for contacting <@&${supportRoleID}> team, we'll be with you shortly!`));
-    message.channel.send("Thank you for contacting our Support team! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`").then(msg => msg.delete({timeout: msgDeleteCooldown}))
-    message.delete({timeout: msgDeleteCooldown});
+    }).then(channel => channel.send(`Thank you for contacting <@&${process.env.SUPPORT_ROLE_ID}> team, we'll be with you shortly!`));
+    message.channel.send("Thank you for contacting our Support team! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`").then(msg => msg.delete({timeout: 20000}))
+    message.delete({timeout: 20000});
   }});
 
-if(WELCOME_MSG == 'TRUE') {
+if(process.env.WELCOME_MSG_NOTIFICATION  == 'TRUE') {
   client.on('guildCreate',g => {
     const channel = g.channels.cache.find(channel => channel.type === 'GUILD_TEXT' && channel.permissionsFor(g.me).has('SEND_MESSAGES'))
     channel.send("Beep, boop.\n\n Hi, I'm CSLA Bot. :wave::skin-tone-1: I'm an assistant bot at CSLA Studio's Discord (https://discord.gg/jBWHyUWu9D).\n\nI am developed by Lukas Maar (https://github.com/LUKICSLA).")
   });
-  client.on('guildMemberAdd',member => {member.guild.channels.cache.get(welcomeChannelID).send("Welcome on CSLA Studio's Discord " + member.user.tag + " 👋🏻");});
-  client.on('guildMemberRemove',member => {member.guild.channels.cache.get(welcomeChannelID).send("Bye " + member.user.tag + " 😭");});
+  client.on('guildMemberAdd',member => {member.guild.channels.cache.get(process.env.WELCOME_CHANNEL_ID).send("Welcome on CSLA Studio's Discord " + member.user.tag + " 👋🏻");});
+  client.on('guildMemberRemove',member => {member.guild.channels.cache.get(process.env.WELCOME_CHANNEL_ID).send("Bye " + member.user.tag + " 😭");});
 }
 
 client.on("ready", () => {console.log(`\n\nLogged in as ${client.user.tag}!\nCopyright © 2022 Lukáš Maár (https://github.com/LUKICSLA)`); client.user.setActivity('CSLA: Iron Curtain');});
-client.login(cslaBotToken);
+client.login(process.env.CBOT_TOKEN);
