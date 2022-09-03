@@ -155,7 +155,7 @@ client.on('message',message => {
 // ticket management commands
   if (message.content.startsWith(prefix + 'ticket')) {
     var ticketID = Math.floor(Math.random() * 100) + 1;
-//  message.react('<:cslastudio:EMOJI_ID_HERE>');         https://support.discord.com/hc/es/community/posts/360069335891-Get-Emoji-ID
+    message.react('<:cslastudio:847143632922345520>');
     message.guild.channels.create(`ticket: ${ticketID}`,
     {
       type: 'text',
