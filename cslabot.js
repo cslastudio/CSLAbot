@@ -24,7 +24,7 @@ client.on('message',message => {
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = Math.floor(totalSeconds % 60);
     let uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
-
+    let ping = Date.now() - message.createdTimestamp;
     let aboutEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
     .setTitle("About Cbot | CSLA assistant bot")
@@ -35,6 +35,7 @@ client.on('message',message => {
       { name: ':robot: Version', value: '1.0.0 (03.09.2022)', inline: true },
       { name: ':scroll: Commands', value: '12', inline: true },
       { name: ':hourglass: Uptime', value: uptime, inline: true },
+      { name: ':ping_pong: Ping', value: `${ping} ms`, inline: true },
     )
     .setFooter(`Feel free to mention me if you need me or use !help.`)
     .setTimestamp()
@@ -49,8 +50,6 @@ client.on('message',message => {
     .setDescription("Here is a list of all available commands.")
     .addFields(
       { name: 'General commands', value: '`!help` - show this list\n`!ticket` - create a new support ticket\n`!joke` - get a random joke\n`!chuck` - get a random Chuck Norris joke\n`!compliment` - get a random compliment\n`!meme` - get a random meme image' },
-      { name: '\u200B', value: '\u200B' },
-      { name: 'Diag commands', value: '`!ping` - get a bot latency' },
       { name: '\u200B', value: '\u200B' },
       { name: 'Admin commands', value: '`!restart` - restart the bot' },
       { name: '\u200B', value: '\u200B' },
@@ -101,8 +100,7 @@ client.on('message',message => {
     message.channel.send("This is an image-only channel!").then(msg => {msg.delete({timeout: 10000});});
   }
 
-// chat commands for fun    
-  if (message.content.startsWith(prefix + 'ping')) {message.reply(`pong! (${message.createdTimestamp - Date.now()} ms)` );}
+// chat commands for fun
   if (message.content.startsWith(prefix + 'joke')) {let jokes = Memer.joke(); message.channel.send(jokes)}
   if (message.content.startsWith(prefix + 'chuck')) {let chuck = Memer.chuckNorris(); message.channel.send(chuck)}
   if (message.content.startsWith(prefix + 'compliment')) {let compliment = Memer.copmliment(); message.channel.send(compliment)}
