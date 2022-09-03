@@ -48,9 +48,11 @@ client.on('message',message => {
     .setThumbnail('http://kai.rf.gd/images/images.png')
     .setDescription("Here is a list of all available commands.")
     .addFields(
-      { name: 'General commands', value: '`!help` - show this list\n`!ticket` - create a new support ticket\n`!joke` - get a random joke\n`!chuck` - get a random Chuck Norris joke\n`!compliment` - get a random compliment\n`!meme` - get a random meme image' },
+      { name: 'General commands', value: '`!help` - show this list\n`!joke` - get a random joke\n`!chuck` - get a random Chuck Norris joke\n`!compliment` - get a random compliment\n`!meme` - get a random meme image' },
       { name: '\u200B', value: '\u200B' },
       { name: 'Admin commands', value: '`!restart` - restart the bot' },
+      { name: '\u200B', value: '\u200B' },
+      { name: 'Support commands', value: '`!ticket` - create a new support ticket' },
       { name: '\u200B', value: '\u200B' },
       { name: 'CSLA Iron Curtain cDLC commands', value: '`!servers` - list of official servers running with CIC\n`!csla` - show all CIC links\n`!biki` - link to our BI Wiki page\n`!ft` - link to our Feedback Tracker project' },
     )
