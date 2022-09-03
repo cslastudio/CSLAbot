@@ -9,7 +9,7 @@ const prefix = '!';
 const cslaBotToken = 'MTAxNDg3MTU4MTM3MTE1ODUyOA.GM4sh_.aIVSGN51jXbju3GLJrmaD8hOQ8OFXwZLwNJv8g';
 
 const welcomeChannelID = '761558359496327203';
-const imgOnlyChannelID = '761558359496327203';
+const imgOnlyChannelID = '852283174523502642';
 const twitchChannelID = '';
 const supportRoleID = '571000938920149011';
 
