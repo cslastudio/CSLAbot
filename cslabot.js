@@ -23,7 +23,7 @@ client.on('message',message => {
     totalSeconds %= 3600;
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = Math.floor(totalSeconds % 60);
-    let uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds.`;
+    let uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
 
     let aboutEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
@@ -31,10 +31,10 @@ client.on('message',message => {
     .setThumbnail('http://kai.rf.gd/images/images.png')
     .setDescription("*Beep, boop.* Hi, I'm Cbot. :wave::skin-tone-1: I'm an assistant bot at CSLA Studio Discord.")
     .addFields(
-      { name: 'Developer', value: 'Lukáš Maár (Lukyy#4488)', inline: true },
-      { name: 'Version', value: '1.0.0 (03.09.2022)', inline: true },
-      { name: 'Commands', value: '13', inline: true },
-      { name: 'Uptime', value: uptime, inline: true },
+      { name: ':bust_in_silhouette: Developer', value: 'Lukáš Maár (Lukyy#4488)', inline: true },
+      { name: ':robot: Version', value: '1.0.0 (03.09.2022)', inline: true },
+      { name: ':scroll: Commands', value: '13', inline: true },
+      { name: ':hourglass: Uptime', value: uptime, inline: true },
     )
     .setFooter(`Feel free to mention me if you need me or use !help.`)
     .setTimestamp()
