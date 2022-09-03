@@ -127,7 +127,6 @@ client.on('message',message => {
       { name: 'CSLA - Iron Curtain - Desert Pack', value: 'Size: 139.663 MB\nLink: [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2687332656)' },
       { name: 'CSLA - Iron Curtain - Campaign', value: 'Size: 322.754 MB\nLink: [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2534376765)' },
       { name: 'CSLA - Iron Curtain - Operations', value: 'Size: 421.121 MB\nLink: [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2719101174)' },
-      { name: 'CSLA - Iron Curtain - Desert Pack', value: 'Size: 139.663 MB\nLink: [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2687332656)' },
     )
     .setFooter(`Feel free to mention me if you need me or use !help.`)
     .setTimestamp()
