@@ -44,7 +44,7 @@ client.on('message',message => {
   if (message.content.startsWith(prefix + 'help')) {
     let helpEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
-    .setTitle("Cbot | CSLA bot")
+    .setTitle("Command list | CSLA bot")
     .setThumbnail('http://kai.rf.gd/images/images.png')
     .setDescription("Here is a list of all available commands.")
     .addFields(
