@@ -11,7 +11,7 @@ const cslaBotToken = 'MTAxNDg3MTU4MTM3MTE1ODUyOA.GM4sh_.aIVSGN51jXbju3GLJrmaD8hO
 const welcomeChannelID = '761558359496327203';
 const imgOnlyChannelID = '761558359496327203';
 const twitchChannelID = '';
-const supportRoleID = '785828301129515009';
+const supportRoleID = '571000938920149011';
 
 client.on('message',message => {
 // diag and help commands
@@ -169,7 +169,7 @@ client.on('message',message => {
         allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
       }
      ],
-    }).then(channel => channel.send(`Thank you for contacting our <@&${supportRoleID}>, we'll be with you shortly!`));
+    }).then(channel => channel.send(`Thank you for contacting <@&${supportRoleID}> team, we'll be with you shortly!`));
     message.channel.send("Thank you for contacting our Support team! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`").then(msg => msg.delete({timeout: 10000}))
     message.delete({timeout: 10000});
   }});
