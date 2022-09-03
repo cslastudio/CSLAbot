@@ -27,7 +27,7 @@ client.on('message',message => {
     let ping = Date.now() - message.createdTimestamp;
     let aboutEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
-    .setTitle("About Cbot | CSLA assistant bot")
+    .setTitle("About Cbot | CSLA bot")
     .setThumbnail('http://kai.rf.gd/images/images.png')
     .setDescription("*Beep, boop.* Hi, I'm **Cbot**. :wave::skin-tone-1: 😊 I'm an assistant bot at CSLA Studio Discord.")
     .addFields(
@@ -44,7 +44,7 @@ client.on('message',message => {
   if (message.content.startsWith(prefix + 'help')) {
     let helpEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
-    .setTitle("Cbot | CSLA assistant bot")
+    .setTitle("Cbot | CSLA bot")
     .setThumbnail('http://kai.rf.gd/images/images.png')
     .setDescription("Here is a list of all available commands.")
     .addFields(
