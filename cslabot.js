@@ -1,11 +1,3 @@
-/*
-    To-Do:
-        Implementovat notifikacie z Twitchu pre nas (CSLA Studio channel podla https://codepen.io/synplex/pen/goeWNb
-        Implementovať uzatváranie ticketov
-
-        message.delete(); -- zmazanie commandu od usera po vlozeni
-*/
-
 // Copyright © 2022 Lukáš Maár
 
 const Discord = require('discord.js');
