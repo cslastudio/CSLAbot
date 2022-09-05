@@ -1,12 +1,12 @@
 {
-  "name": "codelyon-2021",
+  "name": "cbot-2022",
   "version": "1.0.0",
-  "description": "",
+  "description": "An assistant bot at CSLA Studio Discord",
   "main": "cslabot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Lukas Maar",
   "license": "ISC",
   "dependencies": {
     "discord-command-cooldown": "^1.0.8",

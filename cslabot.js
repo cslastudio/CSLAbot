@@ -16,7 +16,7 @@ client.on('message',message => {
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = Math.floor(totalSeconds % 60);
     let uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
-    let ping = Date.now() - message.createdTimestamp;
+    let ping = Math.abs(Date.now() - message.createdTimestamp);
     let aboutEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
     .setTitle("About Cbot | CSLA bot")
@@ -31,8 +31,8 @@ client.on('message',message => {
     .setFooter(`Feel free to mention me if you need me or use !help.`)
     .setTimestamp()
     message.channel.send(aboutEmbed)
-    
   }
+
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'help')) {
     let helpEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
@@ -51,7 +51,7 @@ client.on('message',message => {
     .setFooter(`Feel free to mention me if you need me or use !help.`)
     .setTimestamp()
     message.channel.send(helpEmbed)
-}
+  }
 
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'servers')) {
     let serverEmbed = new Discord.MessageEmbed()
@@ -84,7 +84,7 @@ client.on('message',message => {
     .setFooter(`All our servers are BattlEye protected!`)
     .setTimestamp()
     message.channel.send(serverEmbed)
-}
+  }
 
 // image only channel(s) setup
   if (message.attachments.size == 0 && message.channel.id == process.env.IMG_ONLY_CHANNEL_ID) {
@@ -124,6 +124,7 @@ client.on('message',message => {
     .setTimestamp()
     message.channel.send(cslaEmbed)
   }
+
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'biki')) {message.reply('our biki page is at https://community.bistudio.com/wiki/Category:CSLA:_Iron_Curtain');}
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'ft')) {message.reply('our Feedback Tracker project is at https://feedback.bistudio.com/project/view/59');}
 
