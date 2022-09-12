@@ -11,7 +11,7 @@ client.on('message',async (message) => {
 
 // create reaction role command
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'selfRolesEmbed')) {
-    message.delete({timeout: 20000});
+    message.delete();
     if (!message.member.hasPermission("ADMINISTRATOR")){message.reply('you cannot do that (missing permission: `ADMINISTRATOR`)! ✋'); return;}
     let rolesEmbed = new Discord.MessageEmbed()
       .setColor('#40E0D0')
