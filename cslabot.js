@@ -2,10 +2,57 @@
 
 const Discord = require('discord.js');
 const Memer = require("random-jokes-api");
+const { ReactionRoleManager } = require('discord.js-collector');
 require('dotenv').config();
 const client = new Discord.Client();
+const reactionRoleManager = new ReactionRoleManager(client, {storage: false, path: __dirname + '/roles.json', mongoDbLink: '',});
 
-client.on('message',message => {
+client.on('message',async (message) => {
+
+// create reaction role command
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'selfRolesEmbed')) {
+    message.delete({timeout: 20000});
+    if (!message.member.hasPermission("ADMINISTRATOR")){message.reply('you cannot do that (missing permission: `ADMINISTRATOR`)! ✋'); return;}
+    let rolesEmbed = new Discord.MessageEmbed()
+      .setColor('#40E0D0')
+      .setTitle('Self-assign roles list | Cbot')
+      .addFields(
+        { name: 'React with 1️⃣', value: 'If you want to **get notifications about __general announcements__.**' },
+        { name: 'React with 2️⃣', value: 'If you want to **get notifications about __twitch livestreams__**.' },
+        { name: 'React with 3️⃣', value: 'If you want to **hide ENG section**.' },
+        { name: 'React with 4️⃣', value: 'If you want to **hide CZ/SK section**.' },
+      )
+      .setThumbnail('http://kai.rf.gd/images/images.png')
+      .setFooter(`Feel free to mention me if you need me or use !help.`)
+      .setTimestamp()
+    let msg = await message.channel.send(rolesEmbed);
+    await msg.react('1️⃣');
+    await msg.react('2️⃣');
+    await msg.react('3️⃣');
+    await msg.react('4️⃣');
+    const filter_roles = (reaction, user) => {return reaction.emoji.name === '1️⃣' || reaction.emoji.name === '2️⃣' || reaction.emoji.name === '3️⃣' || reaction.emoji.name === '4️⃣' && user.id === message.author.id && !user.bot;}
+    const role_collector = msg.createReactionCollector(filter_roles, {time: 30000, /* max: 1 */});
+    role_collector.on('collect', async (reaction) => {
+      switch(reaction.emoji.name){
+        case '1️⃣': 
+          reactionRoleManager.createReactionRole({message: msg, roles: ['1018876768725241988'], emoji: reaction.emoji.name, type:1}) 
+          break;
+        
+        case '2️⃣': 
+          reactionRoleManager.createReactionRole({message: msg, roles: ['1018883358375301191'], emoji: reaction.emoji.name, type:1}) 
+          break;
+          
+        case '3️⃣': 
+          reactionRoleManager.createReactionRole({message: msg, roles: ['1018883582887997450'], emoji: reaction.emoji.name, type:1}) 
+          break;
+
+        case '4️⃣':
+          reactionRoleManager.createReactionRole({message: msg, roles: ['1018929380778590219'], emoji: reaction.emoji.name, type:1}) 
+          break;
+      }
+  });
+}
+
 // diag and help commands
   if (message.mentions.has(client.user.id)) {
     let totalSeconds = (client.uptime / 1000);
@@ -42,7 +89,7 @@ client.on('message',message => {
     .addFields(
       { name: 'General commands', value: '`!help` - show this list\n`!joke` - get a random joke\n`!chuck` - get a random Chuck Norris joke\n`!compliment` - get a random compliment\n`!meme` - get a random meme image' },
       { name: '\u200B', value: '\u200B' },
-      { name: 'Admin commands', value: '`!restart` - restart the bot' },
+      { name: 'Admin commands', value: '`!restart` - restart the bot\n`!selfRolesEmbed` - generate a role assignment embed' },
       { name: '\u200B', value: '\u200B' },
       { name: 'Support commands', value: '`!ticket` - create a new support ticket' },
       { name: '\u200B', value: '\u200B' },
@@ -90,7 +137,7 @@ client.on('message',message => {
   if (message.attachments.size == 0 && message.channel.id == process.env.IMG_ONLY_CHANNEL_ID) {
     if (message.author.bot) return false;
     if (message.attachments.size == 0) message.delete();
-    message.channel.send("This is an image-only channel!").then(msg => {msg.delete({timeout: 10000});});
+    message.channel.send("This is an image-only channel!").then(msg => {msg.delete({timeout: 20000});});
   }
 
 // chat commands for fun
@@ -137,7 +184,7 @@ client.on('message',message => {
 
 // admin chat commands
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'restart')) {
-    if (!message.member.hasPermission("ADMINISTRATOR")){message.reply('you cannot do that (missing permission ADMINISTRATOR)! ✋'); return;}
+    if (!message.member.hasPermission("ADMINISTRATOR")){message.reply('you cannot do that (missing permission: `ADMINISTRATOR`)! ✋'); return;}
     message.reply('really? Okay then, bye 😭');
     client.destroy();
     client.login(process.env.CBOT_TOKEN);
