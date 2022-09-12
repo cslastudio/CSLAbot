@@ -66,7 +66,7 @@ client.on('message',async (message) => {
     .setFooter(`Feel free to mention me if you need me or use !help.`)
     .setTimestamp()
     message.channel.send(aboutEmbed)
-  }
+}
 
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'help')) {
     message.delete();
@@ -87,7 +87,7 @@ client.on('message',async (message) => {
     .setFooter(`Feel free to mention me if you need me or use !help.`)
     .setTimestamp()
     message.channel.send(helpEmbed)
-  }
+}
 
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'servers')) {
     message.delete();
@@ -121,14 +121,14 @@ client.on('message',async (message) => {
     .setFooter(`All our servers are BattlEye protected!`)
     .setTimestamp()
     message.channel.send(serverEmbed)
-  }
+}
 
 // image only channel(s) setup
   if (message.attachments.size == 0 && message.channel.id == process.env.IMG_ONLY_CHANNEL_ID) {
     if (message.author.bot) return false;
     if (message.attachments.size == 0) message.delete();
     message.channel.send("This is an image-only channel!").then(msg => {msg.delete({timeout: 20000});});
-  }
+}
 
 // chat commands for fun
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'joke')) {message.delete(); let jokes = Memer.joke(); message.channel.send(jokes)}
@@ -162,7 +162,7 @@ client.on('message',async (message) => {
     .setFooter(`Feel free to mention me if you need me or use !help.`)
     .setTimestamp()
     message.channel.send(cslaEmbed)
-  }
+}
 
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'biki')) {message.delete(); message.reply('our biki page is at https://community.bistudio.com/wiki/Category:CSLA:_Iron_Curtain');}
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'ft')) {message.delete(); message.reply('our Feedback Tracker project is at https://feedback.bistudio.com/project/view/59');}
@@ -171,8 +171,7 @@ client.on('message',async (message) => {
 /*    if (message.content.includes('update')) {message.channel.send("The plan is to resolve issues and fix bugs first and then we can devote our time to possible updates. Any updates will first have to be approved by BI.")}
       if (message.content.includes('size')) {message.channel.send("The current size of the CDLC on the disk is 7.5 GB.")}
       if (message.content.includes('interior')) {message.channel.send("All softskin vehicles and APCs/IFVs have full interior. Tanks have 3D viewports modelled to enable full situational awareness.")}
-      if (message.content.includes('customizable')) {message.channel.send("Vehicles have multitude of stowage changeable via ArmA3's VhC system and there is multiple color variants for majority of them. Also, emblem/text/roundel/flag changes are possible via attributes in the editor.")}
-*/
+      if (message.content.includes('customizable')) {message.channel.send("Vehicles have multitude of stowage changeable via ArmA3's VhC system and there is multiple color variants for majority of them. Also, emblem/text/roundel/flag changes are possible via attributes in the editor.")} */
 
 // admin chat commands
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'restart')) {
@@ -183,7 +182,7 @@ client.on('message',async (message) => {
     client.login(process.env.CBOT_TOKEN);
     console.log('Bot restart done');
     client.user.setActivity('CSLA: Iron Curtain');
-  }
+}
 
 // ticket management commands
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'ticket')) {
@@ -206,7 +205,7 @@ client.on('message',async (message) => {
     }).then(channel => channel.send(`Thank you for contacting <@&${process.env.SUPPORT_ROLE_ID}> team, we'll be with you shortly!`));
     message.channel.send("Thank you for contacting our Support team! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`").then(msg => msg.delete({timeout: 20000}))
     message.delete({timeout: 20000});
-  }});
+}});
 
 if(process.env.WELCOME_MSG_NOTIFICATION  == 'TRUE') {
   client.on('guildCreate',g => {
