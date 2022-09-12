@@ -9,7 +9,7 @@ const reactionRoleManager = new ReactionRoleManager(client, {storage: false, pat
 
 client.on('message',async (message) => {
 
-// create reaction role command
+  // create reaction role command
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'selfRolesEmbed')) {
     message.delete();
     if (!message.member.hasPermission("ADMINISTRATOR")){message.reply('you cannot do that (missing permission: `ADMINISTRATOR`)! ✋'); return;}
@@ -79,10 +79,6 @@ client.on('message',async (message) => {
       { name: 'Command List', value: '`!help` - show this list\n`!joke` - get a random joke\n`!chuck` - get a random Chuck Norris joke\n`!compliment` - get a random compliment\n`!meme` - get a random meme image\n`!restart` - restart the bot (CSLA Studio members)\n`!selfRolesEmbed` - generate an embed (CSLA Studio members)\n`!ticket` - create a new support ticket\n`!servers` - list of official servers running with CIC\n`!csla` - show all CIC links\n`!biki` - link to our BI Wiki page\n`!ft` - link to our Feedback Tracker project' },
       { name: '\u200B', value: '\u200B' },
       { name: 'Feature List', value: '* I\'m actively monitoring all text channels\n* Twitch livestream announcements\n* Support management (ticket system)' },
- /*     { name: '\u200B', value: '\u200B' },
-      { name: 'Support commands', value: '`!ticket` - create a new support ticket' },
-      { name: '\u200B', value: '\u200B' },
-      { name: 'CSLA Iron Curtain cDLC commands', value: '`!servers` - list of official servers running with CIC\n`!csla` - show all CIC links\n`!biki` - link to our BI Wiki page\n`!ft` - link to our Feedback Tracker project' }, */
     )
     .setFooter(`Feel free to mention me if you need me or use !help.`)
     .setTimestamp()
@@ -147,11 +143,13 @@ client.on('message',async (message) => {
 // info commands
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'csla')) {
     message.delete();
+    let member = message.mentions.members.first();
+    if (!member) return message.reply('missing argument `user` (e.g.: `!csla @Lukyy`).');
     let cslaEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
     .setTitle("CSLA: IC and packs | Cbot")
     .setThumbnail('https://scontent.fbts6-1.fna.fbcdn.net/v/t1.18169-9/14322438_1303838882960602_6466372646523026116_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=UFXEd-MRUd8AX8y5wCf&_nc_ht=scontent.fbts6-1.fna&oh=00_AT_HMx0gylrW7oGlii2bLAD3t346ghW_hxjXnzvSTnYtjw&oe=6337D6E9')
-    .setDescription("Here is a list of all our products.")
+    .setDescription(`${member}` + ', here is a list of all our products.')
     .addFields(
       { name: 'Arma 3 Creator DLC: CSLA Iron Curtain', value: 'Size: 7.5 GB\nPrice: 12,99€\nLink: [Steam Store](https://store.steampowered.com/app/1294440/Arma_3_Creator_DLC_CSLA_Iron_Curtain/)' },
       { name: 'CSLA - Iron Curtain - Compatibility Data for Non-Owners', value: 'Size: 3.5 GB\nLink: [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2503886780)' },
@@ -164,8 +162,15 @@ client.on('message',async (message) => {
     message.channel.send(cslaEmbed)
 }
 
-  if (message.content.startsWith(process.env.CBOT_PREFIX + 'biki')) {message.delete(); message.reply('our biki page is at https://community.bistudio.com/wiki/Category:CSLA:_Iron_Curtain');}
-  if (message.content.startsWith(process.env.CBOT_PREFIX + 'ft')) {message.delete(); message.reply('our Feedback Tracker project is at https://feedback.bistudio.com/project/view/59');}
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'biki')) {
+    let member = message.mentions.members.first();
+    if (!member) return message.reply('missing argument `user` (e.g.: `!biki @Lukyy`).'); message.delete(); message.channel.send('Hey' + `${member}` + ', our biki page is at https://community.bistudio.com/wiki/Category:CSLA:_Iron_Curtain');
+  }
+
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'ft')) {
+    let member = message.mentions.members.first();
+    if (!member) return message.reply('missing argument `user` (e.g.: `!ft @Lukyy`).'); message.delete(); message.channel.send('Hey' + `${member}` + ', our Feedback Tracker project is at https://feedback.bistudio.com/project/view/59');
+  }
 
 // auto-replies  
 /*    if (message.content.includes('update')) {message.channel.send("The plan is to resolve issues and fix bugs first and then we can devote our time to possible updates. Any updates will first have to be approved by BI.")}
