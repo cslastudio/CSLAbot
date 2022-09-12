@@ -31,9 +31,9 @@ client.on('message',async (message) => {
     await msg.react('3️⃣');
     await msg.react('4️⃣');
     const filter_roles = (reaction, user) => {return reaction.emoji.name === '1️⃣' || reaction.emoji.name === '2️⃣' || reaction.emoji.name === '3️⃣' || reaction.emoji.name === '4️⃣' && user.id === message.author.id && !user.bot;}
-    const role_collector = msg.createReactionCollector(filter_roles, {time: 30000, /* max: 1 */});
+    const role_collector = msg.createReactionCollector(filter_roles, {/*time: 30,  max: 1 */});
     role_collector.on('collect', async (reaction) => {
-      switch(reaction.emoji.name){
+      /*switch(reaction.emoji.name){
         case '1️⃣': 
           reactionRoleManager.createReactionRole({message: msg, roles: ['1018876768725241988'], emoji: reaction.emoji.name, type:1}) 
           break;
@@ -49,7 +49,11 @@ client.on('message',async (message) => {
         case '4️⃣':
           reactionRoleManager.createReactionRole({message: msg, roles: ['1018929380778590219'], emoji: reaction.emoji.name, type:1}) 
           break;
-      }
+      }*/
+      if (reaction.emoji.name === '1️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018876768725241988'], emoji: reaction.emoji.name, type:1});
+      if (reaction.emoji.name === '2️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018883358375301191'], emoji: reaction.emoji.name, type:1});
+      if (reaction.emoji.name === '3️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018883582887997450'], emoji: reaction.emoji.name, type:1});
+      if (reaction.emoji.name === '4️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018929380778590219'], emoji: reaction.emoji.name, type:1});
   });
 }
 
@@ -203,7 +207,7 @@ client.on('message',async (message) => {
       permissionOverwrites: [
       {
           id: message.guild.roles.everyone,
-          deny: ['VIEW_CHANNEL', 'SEND_MESSAGES'], 
+          deny: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
       },
       {
         id: message.author,
