@@ -72,17 +72,17 @@ client.on('message',async (message) => {
     message.delete();
     let helpEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
-    .setTitle("Command list | Cbot")
+    .setTitle("Command/Feature list | Cbot")
     .setThumbnail('http://kai.rf.gd/images/images.png')
-    .setDescription("Here is a list of all available commands.")
+    .setDescription("Here is a list of all Cbot'\s available commands and features.")
     .addFields(
-      { name: 'General commands', value: '`!help` - show this list\n`!joke` - get a random joke\n`!chuck` - get a random Chuck Norris joke\n`!compliment` - get a random compliment\n`!meme` - get a random meme image' },
+      { name: 'Command List', value: '`!help` - show this list\n`!joke` - get a random joke\n`!chuck` - get a random Chuck Norris joke\n`!compliment` - get a random compliment\n`!meme` - get a random meme image\n`!restart` - restart the bot (CSLA Studio members)\n`!selfRolesEmbed` - generate an embed (CSLA Studio members)\n`!ticket` - create a new support ticket\n`!servers` - list of official servers running with CIC\n`!csla` - show all CIC links\n`!biki` - link to our BI Wiki page\n`!ft` - link to our Feedback Tracker project' },
       { name: '\u200B', value: '\u200B' },
-      { name: 'Admin commands', value: '`!restart` - restart the bot\n`!selfRolesEmbed` - generate a role assignment embed' },
-      { name: '\u200B', value: '\u200B' },
+      { name: 'Feature List', value: '* I\'m actively monitoring all text channels\n* Twitch livestream announcements\n* Support management (ticket system)' },
+ /*     { name: '\u200B', value: '\u200B' },
       { name: 'Support commands', value: '`!ticket` - create a new support ticket' },
       { name: '\u200B', value: '\u200B' },
-      { name: 'CSLA Iron Curtain cDLC commands', value: '`!servers` - list of official servers running with CIC\n`!csla` - show all CIC links\n`!biki` - link to our BI Wiki page\n`!ft` - link to our Feedback Tracker project' },
+      { name: 'CSLA Iron Curtain cDLC commands', value: '`!servers` - list of official servers running with CIC\n`!csla` - show all CIC links\n`!biki` - link to our BI Wiki page\n`!ft` - link to our Feedback Tracker project' }, */
     )
     .setFooter(`Feel free to mention me if you need me or use !help.`)
     .setTimestamp()
