@@ -33,28 +33,11 @@ client.on('message',async (message) => {
     const filter_roles = (reaction, user) => {return reaction.emoji.name === '1️⃣' || reaction.emoji.name === '2️⃣' || reaction.emoji.name === '3️⃣' || reaction.emoji.name === '4️⃣' && user.id === message.author.id && !user.bot;}
     const role_collector = msg.createReactionCollector(filter_roles, {/*time: 30,  max: 1 */});
     role_collector.on('collect', async (reaction) => {
-      /*switch(reaction.emoji.name){
-        case '1️⃣': 
-          reactionRoleManager.createReactionRole({message: msg, roles: ['1018876768725241988'], emoji: reaction.emoji.name, type:1}) 
-          break;
-        
-        case '2️⃣': 
-          reactionRoleManager.createReactionRole({message: msg, roles: ['1018883358375301191'], emoji: reaction.emoji.name, type:1}) 
-          break;
-          
-        case '3️⃣': 
-          reactionRoleManager.createReactionRole({message: msg, roles: ['1018883582887997450'], emoji: reaction.emoji.name, type:1}) 
-          break;
-
-        case '4️⃣':
-          reactionRoleManager.createReactionRole({message: msg, roles: ['1018929380778590219'], emoji: reaction.emoji.name, type:1}) 
-          break;
-      }*/
-      if (reaction.emoji.name === '1️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018876768725241988'], emoji: reaction.emoji.name, type:1}); // change to 851867697712594947 in production build
-      if (reaction.emoji.name === '2️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018883358375301191'], emoji: reaction.emoji.name, type:1}); // change to 851867609624346705 in production build
-      if (reaction.emoji.name === '3️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018883582887997450'], emoji: reaction.emoji.name, type:1}); // change to 1018945068889018478 in production build
-      if (reaction.emoji.name === '4️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018929380778590219'], emoji: reaction.emoji.name, type:1}); // change to 1018944529887395870 in production build
-  });
+      if (reaction.emoji.name === '1️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['851867697712594947'], emoji: reaction.emoji.name, type:1});
+      if (reaction.emoji.name === '2️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['851867609624346705'], emoji: reaction.emoji.name, type:1});
+      if (reaction.emoji.name === '3️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018945068889018478'], emoji: reaction.emoji.name, type:1});
+      if (reaction.emoji.name === '4️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018944529887395870'], emoji: reaction.emoji.name, type:1});
+    });
 }
 
 // diag and help commands
