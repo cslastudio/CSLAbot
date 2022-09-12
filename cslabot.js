@@ -50,15 +50,16 @@ client.on('message',async (message) => {
           reactionRoleManager.createReactionRole({message: msg, roles: ['1018929380778590219'], emoji: reaction.emoji.name, type:1}) 
           break;
       }*/
-      if (reaction.emoji.name === '1️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018876768725241988'], emoji: reaction.emoji.name, type:1});
-      if (reaction.emoji.name === '2️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018883358375301191'], emoji: reaction.emoji.name, type:1});
-      if (reaction.emoji.name === '3️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018883582887997450'], emoji: reaction.emoji.name, type:1});
-      if (reaction.emoji.name === '4️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018929380778590219'], emoji: reaction.emoji.name, type:1});
+      if (reaction.emoji.name === '1️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018876768725241988'], emoji: reaction.emoji.name, type:1}); // 851867697712594947
+      if (reaction.emoji.name === '2️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018883358375301191'], emoji: reaction.emoji.name, type:1}); // 851867609624346705
+      if (reaction.emoji.name === '3️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018883582887997450'], emoji: reaction.emoji.name, type:1}); // 1018945068889018478
+      if (reaction.emoji.name === '4️⃣') reactionRoleManager.createReactionRole({message: msg, roles: ['1018929380778590219'], emoji: reaction.emoji.name, type:1}); // 1018944529887395870
   });
 }
 
 // diag and help commands
   if (message.mentions.has(client.user.id)) {
+    message.delete();
     let totalSeconds = (client.uptime / 1000);
     let days = Math.floor(totalSeconds / 86400);
     totalSeconds %= 86400;
@@ -85,6 +86,7 @@ client.on('message',async (message) => {
   }
 
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'help')) {
+    message.delete();
     let helpEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
     .setTitle("Command list | Cbot")
@@ -105,6 +107,7 @@ client.on('message',async (message) => {
   }
 
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'servers')) {
+    message.delete();
     let serverEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
     .setTitle("Our servers")
@@ -145,10 +148,11 @@ client.on('message',async (message) => {
   }
 
 // chat commands for fun
-  if (message.content.startsWith(process.env.CBOT_PREFIX + 'joke')) {let jokes = Memer.joke(); message.channel.send(jokes)}
-  if (message.content.startsWith(process.env.CBOT_PREFIX + 'chuck')) {let chuck = Memer.chuckNorris(); message.channel.send(chuck)}
-  if (message.content.startsWith(process.env.CBOT_PREFIX + 'compliment')) {let compliment = Memer.copmliment(); message.channel.send(compliment)}
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'joke')) {message.delete(); let jokes = Memer.joke(); message.channel.send(jokes)}
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'chuck')) {message.delete(); let chuck = Memer.chuckNorris(); message.channel.send(chuck)}
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'compliment')) {message.delete(); let compliment = Memer.copmliment(); message.channel.send(compliment)}
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'meme')) {
+    message.delete();
     let meme = Memer.meme()
     let embed = new Discord.MessageEmbed()
     .setTitle(meme.title)
@@ -159,6 +163,7 @@ client.on('message',async (message) => {
 
 // info commands
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'csla')) {
+    message.delete();
     let cslaEmbed = new Discord.MessageEmbed()
     .setColor("40E0D0")
     .setTitle("CSLA: IC and packs | Cbot")
@@ -176,8 +181,8 @@ client.on('message',async (message) => {
     message.channel.send(cslaEmbed)
   }
 
-  if (message.content.startsWith(process.env.CBOT_PREFIX + 'biki')) {message.reply('our biki page is at https://community.bistudio.com/wiki/Category:CSLA:_Iron_Curtain');}
-  if (message.content.startsWith(process.env.CBOT_PREFIX + 'ft')) {message.reply('our Feedback Tracker project is at https://feedback.bistudio.com/project/view/59');}
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'biki')) {message.delete(); message.reply('our biki page is at https://community.bistudio.com/wiki/Category:CSLA:_Iron_Curtain');}
+  if (message.content.startsWith(process.env.CBOT_PREFIX + 'ft')) {message.delete(); message.reply('our Feedback Tracker project is at https://feedback.bistudio.com/project/view/59');}
 
 // auto-replies  
 /*    if (message.content.includes('update')) {message.channel.send("The plan is to resolve issues and fix bugs first and then we can devote our time to possible updates. Any updates will first have to be approved by BI.")}
@@ -188,6 +193,7 @@ client.on('message',async (message) => {
 
 // admin chat commands
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'restart')) {
+    message.delete();
     if (!message.member.hasPermission("ADMINISTRATOR")){message.reply('you cannot do that (missing permission: `ADMINISTRATOR`)! ✋'); return;}
     message.reply('really? Okay then, bye 😭');
     client.destroy();
