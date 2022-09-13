@@ -6,6 +6,7 @@ const { ReactionRoleManager } = require('discord.js-collector');
 require('dotenv').config();
 const client = new Discord.Client();
 const reactionRoleManager = new ReactionRoleManager(client, {storage: false, path: __dirname + '/roles.json', mongoDbLink: '',});
+var channelCount = 0;
 
 client.on('message',async (message) => {
 
@@ -192,6 +193,7 @@ client.on('message',async (message) => {
 // ticket management commands
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'ticket')) {
     var ticketID = Math.floor(Math.random() * 100) + 1;
+    if (channelCount != 0){message.react('❌'); return;}
     message.react('<:cslastudio:847143632922345520>');
     message.guild.channels.create(`ticket: ${ticketID}`,
     {
@@ -212,9 +214,10 @@ client.on('message',async (message) => {
       channel.send(`Thank you for contacting <@&${process.env.SUPPORT_ROLE_ID}> members, we'll be with you shortly!`).then(
       msg => {
         msg.react('🗑️');
+        channelCount = channelCount + 1;
         const filter_actions = (reaction, user) => {return reaction.emoji.name === '🗑️' && user.id === message.author.id && !user.bot;}
         const actions_collector = msg.createReactionCollector(filter_actions, {max: 1});
-        actions_collector.on('collect', async (reaction) => {if (reaction.emoji.name === '🗑️' && msg.member.hasPermission("ADMINISTRATOR")) channel.delete();});
+        actions_collector.on('collect', async (reaction) => {if (reaction.emoji.name === '🗑️' && msg.member.hasPermission("ADMINISTRATOR")) {channel.delete(); channelCount = channelCount - 1;};});
       })
     channel.setParent('853742753271119913');
     });
