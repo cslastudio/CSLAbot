@@ -193,7 +193,11 @@ client.on('message',async (message) => {
 // ticket management commands
   if (message.content.startsWith(process.env.CBOT_PREFIX + 'ticket')) {
     var ticketID = Math.floor(Math.random() * 100) + 1;
-    if (channelCount != 0){message.react('❌'); return;}
+    if (channelCount != 0){
+      message.react('❌');
+      message.channel.send('CSLA Studio members are currently processing a ticket that was created by a user before you. Please wait in the queue, they will be attending to you shortly.');
+      return;
+    }
     message.react('<:cslastudio:847143632922345520>');
     message.guild.channels.create(`ticket: ${ticketID}`,
     {
