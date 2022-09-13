@@ -76,9 +76,9 @@ client.on('message',async (message) => {
     .setThumbnail('http://kai.rf.gd/images/images.png')
     .setDescription("Here is a list of all Cbot'\s available commands and features.")
     .addFields(
-      { name: 'Command List', value: '`!help` - show this list\n`!joke` - get a random joke\n`!chuck` - get a random Chuck Norris joke\n`!compliment` - get a random compliment\n`!meme` - get a random meme image\n`!restart` - restart the bot (CSLA Studio members)\n`!selfRolesEmbed` - generate an embed (CSLA Studio members)\n`!ticket` - create a new support ticket\n`!servers` - list of official servers running with CIC\n`!csla` - show all CIC links\n`!biki` - link to our BI Wiki page\n`!ft` - link to our Feedback Tracker project' },
+      { name: 'Command List', value: '`!help` - show this list\n`!joke` - get a random joke\n`!chuck` - get a random Chuck Norris joke\n`!compliment` - get a random compliment\n`!meme` - get a random meme image\n`!restart` - restart the bot (CSLA Studio members)\n`!selfRolesEmbed` - generate an embed (CSLA Studio members)\n`!ticket` - create a new support ticket\n`!servers` - list of official servers running with CIC\n`!csla <user>` - show all CIC links\n`!biki <user>` - link to our BI Wiki page\n`!ft <user>` - link to our Feedback Tracker project' },
       { name: '\u200B', value: '\u200B' },
-      { name: 'Feature List', value: '* I\'m actively monitoring all text channels\n* Twitch livestream announcements\n* Support management (ticket system)' },
+      { name: 'Feature List', value: '* I\'m actively monitoring all text channels\n* Twitch livestream announcements\n* Support management (ticket system)\n* I\'m providing all required links to CIC products' },
     )
     .setFooter(`Feel free to mention me if you need me or use !help.`)
     .setTimestamp()
