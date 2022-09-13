@@ -196,7 +196,7 @@ client.on('message',async (message) => {
     message.guild.channels.create(`ticket: ${ticketID}`,
     {
       type: 'text',
-      topic: `Your dedicated space to communicate with our Support team.`,
+      topic: `Your dedicated space to communicate with CSLA Studio members.`,
       permissionOverwrites: [
       {
           id: message.guild.roles.everyone,
@@ -207,8 +207,18 @@ client.on('message',async (message) => {
         allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
       }
      ],
-    }).then(channel => channel.send(`Thank you for contacting <@&${process.env.SUPPORT_ROLE_ID}> team, we'll be with you shortly!`));
-    message.channel.send("Thank you for contacting our Support team! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`").then(msg => msg.delete({timeout: 20000}))
+    }).then(
+    channel => {
+      channel.send(`Thank you for contacting <@&${process.env.SUPPORT_ROLE_ID}> members, we'll be with you shortly!`).then(
+      msg => {
+        msg.react('🗑️');
+        const filter_actions = (reaction, user) => {return reaction.emoji.name === '🗑️' && user.id === message.author.id && !user.bot;}
+        const actions_collector = msg.createReactionCollector(filter_actions, {max: 1});
+        actions_collector.on('collect', async (reaction) => {if (reaction.emoji.name === '🗑️' && msg.member.hasPermission("ADMINISTRATOR")) channel.delete();});
+      })
+    channel.setParent('853742753271119913');
+    });
+    message.channel.send("Thank you for contacting CSLA Studio members! I have created a new ticket for you with this ID: " + "`" + `${ticketID}` + "`").then(msg => msg.delete({timeout: 20000}))
     message.delete({timeout: 20000});
 }});
 
