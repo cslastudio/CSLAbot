@@ -5,4 +5,5 @@ It is still being extended with other commands and functions, but the following 
 * automatic moderation of image-only channels
 * automatic assignment of roles based on a choice of options
 * basic assistance commands
+* automatic handling of incoming tickets
 * fun commands and much more ...
