@@ -4,5 +4,5 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('help')
         .setDescription('Provides help'),
-    async execute(interaction) {interaction.reply("Okay")},
+    async execute(interaction) {interaction.reply("If you need to check the list of available commands for Cbot start typing with `/` at the beginning, and if you need to contact us privately don't hesitate to contact us either via email or here on Discord via ticket using the `!ticket` command. ")},
 };
