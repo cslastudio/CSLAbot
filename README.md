@@ -34,7 +34,7 @@ node .
 
 We can automatically check every hour if the bot is running on the server using a cron job. Execute `crontab -e` and add this line at the end of the file:
 ```bash
-0 * * * * /home/lukino/.nvm/versions/node/v16.17.0/bin/node /home/lukino/cslabot.js >> /home/lukino/cbot_lob.log 2>&1
+0 * * * * /home/lukino/.nvm/versions/node/v16.17.0/bin/node /home/lukino/cslabot.js >> /home/lukino/cbot.log 2>&1
 ```
 | :warning: **When using this method, there is no need to manually start Cbot via the `node .` command!** |
 | --- |
