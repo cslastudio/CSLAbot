@@ -64,3 +64,7 @@ Lastly, we want to start PM2 and Cbot automatically when the system reboots, so 
 ```shell
 pm2 startup systemd
 ```
+_(Optional)_ To check PM2 logs with timestamps (e.g. if Cbot crashed) we can use the following command:
+```shell
+pm2 logs Cbot --time
+```
