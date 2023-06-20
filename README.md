@@ -31,10 +31,36 @@ To start Cbot, navigate to the directory where you downloaded Cbot and run this 
 ```shell
 node .
 ```
-
+### Method #1: Cron job
 We can automatically check every hour if the bot is running on the server using a cron job. Execute `crontab -e` and add this line at the end of the file:
 ```bash
 0 * * * * /home/lukino/.nvm/versions/node/v16.17.0/bin/node /home/lukino/cslabot.js >> /home/lukino/cbot.log 2>&1
 ```
-| :warning: **When using this method, there is no need to manually start Cbot via the `node .` command!** |
+| :warning: **When using this method, there is no need to start Cbot via the `node .` command manually!** |
 | --- |
+
+### Method #2: PM2 process manager (recommended)
+A more effective approach is to use PM2 process manager and NodeJS:
+```shell
+sudo apt-get install nodejs npm
+```
+
+Install PM2 globally by running the following command:
+```shell
+sudo npm install -g pm2
+```
+
+Start Cbot with PM2 using the following command:
+```shell
+pm2 start cslabot.js --name "Cbot"
+```
+
+PM2 will monitor Cbot and automatically restart it if it crashes. We can check the status of Cbot with the following command:
+```shell
+pm2 list
+```
+
+Lastly, we want to start PM2 and Cbot automatically when the system reboots, so use the following command:
+```shell
+pm2 startup systemd
+```
