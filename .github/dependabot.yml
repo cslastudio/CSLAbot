@@ -1,0 +1,15 @@
+version: 2
+updates:
+  - package-ecosystem: "npm" 
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "friday"
+    reviewers:
+      - "LUKICSLA"
+    assignees:
+      - "LUKICSLA"
+    labels:
+      - "vulnerability"
+      - "dependencies"
+    open-pull-requests-limit: 5
