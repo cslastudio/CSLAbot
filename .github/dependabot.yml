@@ -12,4 +12,3 @@ updates:
     labels:
       - "vulnerability"
       - "dependencies"
-    open-pull-requests-limit: 5
