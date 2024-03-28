@@ -27,7 +27,7 @@ client.once(Events.ClientReady, () => {
   );
   client.user.setPresence({
     activities: [{ name: `chat`, type: ActivityType.Watching }],
-    status: "dnd",
+    status: "online",
   });
 });
 
