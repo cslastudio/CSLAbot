@@ -6,6 +6,7 @@ module.exports = {
         .setDescription('Creates a private ticket through which you can communicate directly with us'),
     async execute(interaction) {
         const ticketID = Math.floor(Math.random() * 100000) + 1;
+
         const modal = new ModalBuilder()
             .setCustomId('ticketModal')
             .setTitle(`Creating ticket T${ticketID}`);
@@ -19,13 +20,15 @@ module.exports = {
 
         const actionRow = new ActionRowBuilder().addComponents(messageInput);
         modal.addComponents(actionRow);
+
         await interaction.showModal(modal);
+
         const filter = (i) => i.customId === 'ticketModal' && i.user.id === interaction.user.id;
 
         interaction.awaitModalSubmit({ filter, time: 60000 })
             .then(async (modalInteraction) => {
-                const ticketID = Math.floor(Math.random() * 100000) + 1;
                 const userMessage = modalInteraction.fields.getTextInputValue('messageInput');
+                const author = modalInteraction.user;
 
                 try {
                     const channel = await interaction.guild.channels.create({
@@ -39,13 +42,13 @@ module.exports = {
                                 deny: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages],
                             },
                             {
-                                id: interaction.user.id,
+                                id: author.id,
                                 allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages],
                             },
                         ],
                     });
 
-                    await channel.send(`Thank you for reaching us, we'll be with you shortly!\n\n**Provided message:**\n*${userMessage}*`);
+                    await channel.send(`Ticket T\`${ticketID}\` created by ${author}.\n\n**Message:**\n${userMessage}`);
 
                     await modalInteraction.reply({ content: `Your ticket has been created with ID: \`${ticketID}\``, ephemeral: true });
                 } catch (error) {
