@@ -3,7 +3,7 @@ const { SlashCommandBuilder, PermissionFlagsBits, ChannelType } = require('disco
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('ticket')
-        .setDescription('Creates a new support ticket'),
+        .setDescription('Creates a private ticket through which you can communicate directly with us'),
     async execute(interaction) {
         const ticketID = Math.floor(Math.random() * 100000) + 1;
 

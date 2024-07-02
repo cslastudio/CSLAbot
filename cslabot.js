@@ -23,7 +23,7 @@ for (const file of commandFiles) {
 
 client.once(Events.ClientReady, () => {
   console.log(
-    `\n\nLogged in as ${client.user.tag}!\nCopyright © 2022-2023 Lukáš Maár (https://github.com/LUKICSLA)`,
+    `\n\nLogged in as ${client.user.tag}!\nCopyright © 2022-2024 Lukáš Maár (https://github.com/LUKICSLA)`,
   );
   client.user.setPresence({
     activities: [{ name: `chat`, type: ActivityType.Watching }],
