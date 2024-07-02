@@ -25,7 +25,7 @@ module.exports = {
 
         const filter = (i) => i.customId === 'ticketModal' && i.user.id === interaction.user.id;
 
-        interaction.awaitModalSubmit({ filter, time: 60000 })
+        interaction.awaitModalSubmit({ filter, time: 3600000 }) // time limit to submit modal: 60 minutes 
             .then(async (modalInteraction) => {
                 const userMessage = modalInteraction.fields.getTextInputValue('messageInput');
                 const author = modalInteraction.user;
