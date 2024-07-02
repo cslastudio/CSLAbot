@@ -8,12 +8,12 @@ module.exports = {
         const ticketID = Math.floor(Math.random() * 100000) + 1;
 
         try {
-            await interaction.reply({ content: `Thank you for contacting our Support team! I have created a new ticket for you with this ID: \`${ticketID}\``, ephemeral: true });
+            await interaction.reply({ content: `Thank you for reaching us, I have created a new ticket for you with this ID: \`${ticketID}\``, ephemeral: true });
 
             const channel = await interaction.guild.channels.create({
                 name: `T${ticketID}`,
                 type: ChannelType.GuildText,
-                topic: 'Your dedicated space to communicate with our Support team.',
+                topic: 'A private ticket through which you can communicate directly with us',
                 parent: '1257701693949476997',
                 permissionOverwrites: [
                     {
@@ -27,7 +27,7 @@ module.exports = {
                 ],
             });
 
-            await channel.send(`Thank you for contacting <@&${process.env.SUPPORT_ROLE_ID}> team, we'll be with you shortly!`);
+            await channel.send(`Thank you for reaching us, we'll be with you shortly!`);
         } catch (error) {
             console.error('Error creating ticket:', error);
             if (!interaction.replied) {
